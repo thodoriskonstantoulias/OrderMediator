@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMediator", "OrderMediator\OrderMediator.csproj", "{15CCDFB0-E3DC-4B48-81A5-DCECF7686F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderMediator", "OrderMediator\OrderMediator.csproj", "{15CCDFB0-E3DC-4B48-81A5-DCECF7686F61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMediator.Data", "OrderMediaot.Data\OrderMediator.Data.csproj", "{A0D1C71E-A112-47AA-814F-80038A0EA72A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMediator.Data", "OrderMediator.Data\OrderMediator.Data.csproj", "{E6BD408E-DD1F-4BB3-B509-28766ACDBA8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{15CCDFB0-E3DC-4B48-81A5-DCECF7686F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15CCDFB0-E3DC-4B48-81A5-DCECF7686F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15CCDFB0-E3DC-4B48-81A5-DCECF7686F61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0D1C71E-A112-47AA-814F-80038A0EA72A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0D1C71E-A112-47AA-814F-80038A0EA72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0D1C71E-A112-47AA-814F-80038A0EA72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0D1C71E-A112-47AA-814F-80038A0EA72A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6BD408E-DD1F-4BB3-B509-28766ACDBA8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6BD408E-DD1F-4BB3-B509-28766ACDBA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6BD408E-DD1F-4BB3-B509-28766ACDBA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6BD408E-DD1F-4BB3-B509-28766ACDBA8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

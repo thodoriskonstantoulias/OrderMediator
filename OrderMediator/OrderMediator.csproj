@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OrderMediaot.Data\OrderMediator.Data.csproj" />
+    <ProjectReference Include="..\OrderMediator.Data\OrderMediator.Data.csproj" />
   </ItemGroup>
+
 
 </Project>
