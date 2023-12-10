@@ -27,6 +27,11 @@ builder.Services.AddHttpClient<IERPService, ERPService>(client =>
     client.BaseAddress = new Uri(builder.Configuration["ErpEndpoint"]);
 });
 
+builder.Services.AddHttpClient<IOrderManagementSystemService, OrderManagementSystemService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["OrderManagementSystemEndpoint"]);
+});
+
 var app = builder.Build();
 
 // Seed Database

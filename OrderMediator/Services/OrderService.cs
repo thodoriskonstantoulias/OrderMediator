@@ -11,16 +11,19 @@ namespace OrderMediator.Services
         private readonly IPriceResolver priceResolver;
         private readonly IEmailService emailService;
         private readonly IERPService erpService;
+        private readonly IOrderManagementSystemService orderManagementSystemService;
 
         public OrderService(IPriceService priceService, 
             IPriceResolver priceResolver,
             IEmailService emailService,
-            IERPService erpService)
+            IERPService erpService,
+            IOrderManagementSystemService orderManagementSystemService)
         {
             this.priceService = priceService;
             this.priceResolver = priceResolver;
             this.emailService = emailService;
             this.erpService = erpService;
+            this.orderManagementSystemService = orderManagementSystemService;
         }
 
         public async Task<OrderMediatorResult> SendOrderAsync(IFormFile file)
@@ -70,6 +73,17 @@ namespace OrderMediator.Services
                     {
                         Success = false,
                         ErrorMessage = "Error in updating stock"
+                    };
+                }
+
+                //Send order Step
+                var sendOrder = await this.orderManagementSystemService.SendOrderToManagementSystemAsync(orderDetails);
+                if (!sendOrder!.Success)
+                {
+                    return new OrderMediatorResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Error in sending order"
                     };
                 }
 
