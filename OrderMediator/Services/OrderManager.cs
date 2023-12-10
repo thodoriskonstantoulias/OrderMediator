@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OrderMediator.Services
 {
-    public class OrderService : IOrderService
+    public class OrderManager : IOrderManager
     {
         private readonly IPriceService priceService;
         private readonly IPriceResolver priceResolver;
@@ -13,7 +13,7 @@ namespace OrderMediator.Services
         private readonly IERPService erpService;
         private readonly IOrderManagementSystemService orderManagementSystemService;
 
-        public OrderService(IPriceService priceService, 
+        public OrderManager(IPriceService priceService, 
             IPriceResolver priceResolver,
             IEmailService emailService,
             IERPService erpService,
@@ -141,6 +141,10 @@ namespace OrderMediator.Services
                 {
                     count++;
                     var line = await reader.ReadLineAsync();
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
 
                     if (count == 1)
                     {

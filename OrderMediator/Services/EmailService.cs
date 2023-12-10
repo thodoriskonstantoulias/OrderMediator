@@ -8,7 +8,6 @@
         public Task SendMailAsync(string body)
         {
             return Task.CompletedTask;
-           // throw new NotImplementedException();
         }
     }
 }

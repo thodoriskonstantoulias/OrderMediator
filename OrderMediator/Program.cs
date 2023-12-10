@@ -16,7 +16,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderManager, OrderManager>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IPriceService, PriceService>();
 builder.Services.AddScoped<IEmailService, EmailService>();

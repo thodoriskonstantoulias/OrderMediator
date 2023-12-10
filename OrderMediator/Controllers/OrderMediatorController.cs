@@ -9,10 +9,10 @@ namespace OrderMediator.Controllers
     public class OrderMediatorController : ControllerBase
     {
         private readonly ILogger<OrderMediatorController> _logger;
-        private readonly IOrderService orderService;
+        private readonly IOrderManager orderService;
 
         public OrderMediatorController(ILogger<OrderMediatorController> logger,
-            IOrderService orderService)
+            IOrderManager orderService)
         {
             _logger = logger;
             this.orderService = orderService;
@@ -21,7 +21,6 @@ namespace OrderMediator.Controllers
         [HttpGet("GetOrderFile")]
         public async Task<IActionResult> GetOrderFile(IFormFile orderFile)
         {
-            var test = 12;
             var orderResult = await this.orderService.SendOrderAsync(orderFile);
 
             if (!string.IsNullOrWhiteSpace(orderResult.ErrorMessage))

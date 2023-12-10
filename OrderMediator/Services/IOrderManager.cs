@@ -2,7 +2,7 @@
 
 namespace OrderMediator.Services
 {
-    public interface IOrderService
+    public interface IOrderManager
     {
         Task<OrderMediatorResult> SendOrderAsync(IFormFile file);
     }
