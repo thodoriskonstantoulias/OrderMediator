@@ -4,7 +4,7 @@ namespace OrderMediator.Services
 {
     public class PriceResolver : IPriceResolver
     {
-        public bool ResolveFinalPrices(OrderModel orderModel, Dictionary<string, decimal> dbPrices)
+        public bool ResolveFinalPrices(OrderModel orderModel, Dictionary<string, decimal?> dbPrices)
         {
             var mismatch = false;
             foreach (var article in orderModel.OrderDetails)

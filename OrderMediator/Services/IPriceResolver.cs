@@ -4,6 +4,6 @@ namespace OrderMediator.Services
 {
     public interface IPriceResolver
     {
-        bool ResolveFinalPrices(OrderModel orderModel, Dictionary<string, decimal> dbPrices);
+        bool ResolveFinalPrices(OrderModel orderModel, Dictionary<string, decimal?> dbPrices);
     }
 }
