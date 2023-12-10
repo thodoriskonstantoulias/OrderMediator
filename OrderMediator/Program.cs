@@ -22,6 +22,11 @@ builder.Services.AddScoped<IPriceService, PriceService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPriceResolver, PriceResolver>();
 
+builder.Services.AddHttpClient<IERPService, ERPService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ErpEndpoint"]);
+});
+
 var app = builder.Build();
 
 // Seed Database

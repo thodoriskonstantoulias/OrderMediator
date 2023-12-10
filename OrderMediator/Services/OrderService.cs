@@ -10,23 +10,28 @@ namespace OrderMediator.Services
         private readonly IPriceService priceService;
         private readonly IPriceResolver priceResolver;
         private readonly IEmailService emailService;
+        private readonly IERPService erpService;
 
         public OrderService(IPriceService priceService, 
             IPriceResolver priceResolver,
-            IEmailService emailService)
+            IEmailService emailService,
+            IERPService erpService)
         {
             this.priceService = priceService;
             this.priceResolver = priceResolver;
             this.emailService = emailService;
+            this.erpService = erpService;
         }
 
         public async Task<OrderMediatorResult> SendOrderAsync(IFormFile file)
         {
             try
             {
+                // Validate file contents
                 var orderDetails = await this.ReadFromFileAsync(file);
                 this.ValidateOrderContent(orderDetails);
 
+                // Prices step
                 var prices = await this.priceService.CheckAndResolvePricesMismatchAsync(orderDetails.OrderDetails.Select(x => x.EANArticle)!, orderDetails.OrderHeader!.EANBuyer!);
                 if (!prices.Any())
                 {
@@ -43,6 +48,29 @@ namespace OrderMediator.Services
                 {
                     //send mail - mock
                     await this.emailService.SendMailAsync("There is a price mismatch");
+                }
+
+                //ERP Step
+                var erpResult = await this.erpService.CheckStockAvailabilityAsync(orderDetails);
+                if (!erpResult!.Success)
+                {
+                    //send mail - mock
+                    await this.emailService.SendMailAsync($"Following articles are not available from erp : {string.Join(", ", erpResult.UnavailableItems!)}");
+                    return new OrderMediatorResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Stock not available"
+                    };
+                }
+
+                var erpUpdateResult = await this.erpService.UpdateStockAsync(orderDetails);
+                if (!erpUpdateResult!.Success)
+                {
+                    return new OrderMediatorResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Error in updating stock"
+                    };
                 }
 
             }
