@@ -18,5 +18,10 @@ namespace OrderMediator.Data.Data
         public DbSet<ArticlePrice>? ArticlePrices { get; set; }
 
         public DbSet<PriceList>? PriceLists { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ArticlePrice>().HasKey(t => new { t.ArticleCode, t.PriceListID });
+        }
     }
 }

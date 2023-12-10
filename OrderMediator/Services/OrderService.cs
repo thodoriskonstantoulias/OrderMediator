@@ -1,4 +1,5 @@
-﻿using OrderMediator.Exceptions;
+﻿using OrderMediator.Data.Services;
+using OrderMediator.Exceptions;
 using OrderMediator.Models;
 using System.Text;
 
@@ -6,12 +7,44 @@ namespace OrderMediator.Services
 {
     public class OrderService : IOrderService
     {
+        private readonly IPriceService priceService;
+        private readonly IPriceResolver priceResolver;
+        private readonly IEmailService emailService;
+
+        public OrderService(IPriceService priceService, 
+            IPriceResolver priceResolver,
+            IEmailService emailService)
+        {
+            this.priceService = priceService;
+            this.priceResolver = priceResolver;
+            this.emailService = emailService;
+        }
+
         public async Task<OrderMediatorResult> SendOrderAsync(IFormFile file)
         {
             try
             {
                 var orderDetails = await this.ReadFromFileAsync(file);
                 this.ValidateOrderContent(orderDetails);
+
+                var prices = await this.priceService.CheckAndResolvePricesMismatchAsync(orderDetails.OrderDetails.Select(x => x.EANArticle)!, orderDetails.OrderHeader!.EANBuyer!);
+                if (!prices.Any())
+                {
+                    return new OrderMediatorResult
+                    {
+                        Success = false,
+                        ErrorMessage = "Prices not resolved"
+                    };
+                }
+
+                var mismatch = this.priceResolver.ResolveFinalPrices(orderDetails, prices);
+
+                if (mismatch)
+                {
+                    //send mail - mock
+                    await this.emailService.SendMailAsync("There is a price mismatch");
+                }
+
             }
             catch (OrderException ex)
             {

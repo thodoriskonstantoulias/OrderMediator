@@ -10,10 +10,8 @@ namespace OrderMediator.Data.Data.Entities
 {
     public class ArticlePrice
     {
-        [Key]
         public string? ArticleCode { get; set; }
 
-        [Key]
         [Required]
         public int? PriceListID { get; set; }
 
