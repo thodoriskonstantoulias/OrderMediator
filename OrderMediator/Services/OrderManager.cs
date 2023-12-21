@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OrderMediator.Services
 {
+    // feedback: wanted better exception handling here - showing stack trace too when error thrown from validations
     public class OrderManager : IOrderManager
     {
         private readonly IPriceService priceService;
